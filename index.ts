@@ -1,22 +1,10 @@
-import { Boom } from "@hapi/boom";
 import NodeCache from "@cacheable/node-cache";
 import readline from "readline";
 import P from "pino";
 import makeWASocket, {
-  AnyMessageContent,
-  CacheStore,
-  delay,
   DisconnectReason,
-  fetchLatestBaileysVersion,
-  getAggregateVotesInPollMessage,
-  isJidNewsletter,
-  makeCacheableSignalKeyStore,
-  proto,
   useMultiFileAuthState,
-  WAMessageContent,
-  WAMessageKey,
 } from "@whiskeysockets/baileys";
-import { log } from "console";
 
 const logger = P({
   level: "trace",
@@ -37,21 +25,13 @@ const logger = P({
 });
 logger.level = "trace";
 
-const doReplies = true;
-const usePairingCode = true;
 const PHONE_NUMBER = "27612266700";
-
-// external map to store retry counts of messages when decryption/encryption fails
-// keep this out of the socket itself, so as to prevent a message decryption/encryption loop across socket restarts
-const msgRetryCounterCache = new NodeCache() as CacheStore;
 
 // Read line interface
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
-const question = (text: string) =>
-  new Promise<string>((resolve) => rl.question(text, resolve));
 
 // start a connection
 async function startBot() {
