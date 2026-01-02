@@ -26,7 +26,7 @@ logger.level = "trace";
 const PHONE_NUMBER = "27612266700";
 
 // start a connection
-async function startBot() {
+async function startService() {
   const { state, saveCreds } = await useMultiFileAuthState("auth");
 
   const sock = makeWASocket({
@@ -89,7 +89,7 @@ https://www.youtube.com/watch?v=d43tivfx0qw`,
       const shouldReconnect =
         (lastDisconnect?.error as any)?.output?.statusCode !==
         DisconnectReason.loggedOut;
-      if (shouldReconnect) startBot();
+      if (shouldReconnect) startService();
     } else if (connection === "open") {
       console.log("✅ Connection fully open!");
     }
@@ -117,4 +117,4 @@ https://www.youtube.com/watch?v=d43tivfx0qw`,
     }, 5000); // 5 second delay
   }
 }
-startBot();
+startService();

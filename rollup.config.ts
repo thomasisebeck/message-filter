@@ -5,7 +5,7 @@ import copy from "rollup-plugin-copy";
 export default {
   input: "src/index.ts", // Entry point for the bundle (main TypeScript file)
   output: {
-    file: "dist/index.js", // Output file location and name
+    file: "app/index.js", // Output file location and name
     format: "es", // Output format: ES module
     sourcemap: false, // Generate sourcemaps for easier debugging
   },
