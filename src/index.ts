@@ -79,34 +79,6 @@ async function startService() {
           "I told a chemistry joke… but there was no reaction.",
           "Why did the librarian get kicked out of the party? She kept checking everyone out!",
         ];
-
-        const quotes = [
-          "Time isn’t the main thing. It’s the only thing.",
-          "Take a deep breath.",
-          "How we spend our days, is, of course, how we spend our lives.",
-          "This minute is yours.",
-          "You’re allowed to be bored.",
-          "Your thumb is working harder than your brain.",
-          "Choose presence.",
-          "Choose intention.",
-          "Choose depth.",
-          "Choose focus.",
-          "Choose stillness.",
-          "Just checking in with reality.",
-          "Still here? Take a breath.",
-          "Plot twist: there’s another reel after this.",
-          "Your future self says hi.",
-          "Take a moment. Notice your breathing.",
-          "Check in with your posture.",
-          "Slow your breathing, just a little.",
-          "Feel your feet on the ground.",
-          "Notice the room around you.",
-          "You’re here.",
-          "Take one conscious breath.",
-        ];
-
-        const isAware = messageText?.toLowerCase().includes("i am aware");
-
         const isJoke = messageText?.toLowerCase().includes("joke");
 
         if (isJoke) {
@@ -118,9 +90,7 @@ ${randomJoke}`,
           });
         }
 
-        if ((isInstagramReel || isYoutubeShort) && !isAware) {
-          const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-
+        if (isInstagramReel || isYoutubeShort) {
           console.log("FILTERING BANNED CONTENT");
 
           await sock.chatModify(
@@ -133,14 +103,6 @@ ${randomJoke}`,
             },
             from!,
           );
-
-          await sock.sendMessage(from!, {
-            text: `"${randomQuote}"
-
-https://www.sciencedirect.com/science/article/pii/S2405844024063771
-https://pmc.ncbi.nlm.nih.gov/articles/PMC11066677/
-https://www.youtube.com/watch?v=d43tivfx0qw`,
-          });
         }
       }
     }
